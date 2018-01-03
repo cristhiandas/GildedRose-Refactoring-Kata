@@ -14,11 +14,11 @@ class Shop {
   updateQuality() {
     this.items.forEach(function(item){
 
-      const sulfaras = item.name == 'Sulfuras, Hand of Ragnaros'
+      const sulfaras = item.name.includes('Sulfuras')
 
-      const agedBrie = item.name == 'Aged Brie'
+      const agedBrie = item.name.includes('Aged Brie')
 
-      const backstagePass = item.name == 'Backstage passes to a TAFKAL80ETC concert'
+      const backstagePass = item.name.includes('Backstage passes')
 
       const normalItems = !agedBrie && !backstagePass
 
