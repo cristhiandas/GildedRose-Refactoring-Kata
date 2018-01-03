@@ -10,6 +10,7 @@ class Shop {
   constructor(items=[]){
     this.items = items;
   }
+
   updateQuality() {
     this.items.forEach(function(item){
 
@@ -19,33 +20,43 @@ class Shop {
 
       const backstagePass = item.name == 'Backstage passes to a TAFKAL80ETC concert'
 
+      const normalItems = !agedBrie && !backstagePass
+
+      let belowMaxQuality = () => item.quality < 50
+
+      let reduceQuality = () => {
+        item.quality -= 1
+      }
+
+      let increaseQuality = () => {
+        item.quality += 1
+      }
+
+      let backstagePasses = () => {
+          belowMaxQuality() ? increaseQuality() :false
+          item.sellIn < 10 && belowMaxQuality() ? increaseQuality() : false;
+          item.sellIn < 5 && belowMaxQuality() ? increaseQuality() : false;
+          item.sellIn < 0 ? item.quality -= item.quality : false
+      }
+
+      let agedBries = () => {
+          belowMaxQuality() ? increaseQuality() : false
+          item.sellIn < 0 && belowMaxQuality() ? increaseQuality() : false
+      }
+
+      let normalItem = () => {
+          item.quality > 0 ? reduceQuality() : false
+          item.sellIn < 0 ? reduceQuality() : false
+      }
+
+      let specialItem = () => {
+        agedBrie ? agedBries() : false
+        backstagePass ? backstagePasses() : false
+      }
+
       if (!sulfaras) {
-        item.sellIn = item.sellIn - 1;
-        if ( !agedBrie && !backstagePass) {
-          if (item.quality > 0) {
-              item.quality -= 1;
-          } if (item.sellIn <0 ) {
-              item.quality -= 1;
-          }
-        } else {
-          if (item.quality < 50 ) {
-            item.quality += 1;
-            if (item.sellIn < 0 && item.quality < 50) {
-              item.quality += 1;
-            }
-            if (backstagePass) {
-              if (item.sellIn < 10 && item.quality < 50) {
-                  item.quality += 1;
-              }
-              if (item.sellIn < 5 && item.quality < 50) {
-                  item.quality += 1;
-              }
-            }
-          }
-          if (item.sellIn < 0 && backstagePass) {
-            item.quality -= item.quality;
-          }
-        }
+        item.sellIn -= 1;
+        normalItems ? normalItem() : specialItem()
       }
     });
     return this.items;
