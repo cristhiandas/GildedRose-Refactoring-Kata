@@ -20,7 +20,9 @@ class Shop {
 
       const backstagePass = item.name.includes('Backstage passes')
 
-      const normalItems = !agedBrie && !backstagePass
+      const conjured = item.name.includes('Conjured')
+
+      const normalItems = !agedBrie && !backstagePass && !conjured
 
       let belowMaxQuality = () => item.quality < 50
 
@@ -49,9 +51,15 @@ class Shop {
           item.sellIn < 0 ? reduceQuality() : false
       }
 
+      let conjuredItem = () => {
+        normalItem();
+        normalItem();
+      }
+
       let specialItem = () => {
         agedBrie ? agedBries() : false
         backstagePass ? backstagePasses() : false
+        conjured ? conjuredItem() : false
       }
 
       if (!sulfaras) {

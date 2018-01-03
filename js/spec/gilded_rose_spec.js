@@ -115,6 +115,20 @@ describe("Gilded Rose", function() {
     expect(items[0].quality).toEqual(13);
   });
 
+  it("Conjured items degrade in Quality twice as fast as normal items", function() {
+    const gildedRose = new Shop([ new Item("Conjured mana cake", 1, 10) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(0);
+    expect(items[0].quality).toEqual(8);
+  })
+
+  it("Conjured items degrade until quality reaches 0", function() {
+    const gildedRose = new Shop([ new Item("Conjured mana cake", 1, 1) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(0);
+    expect(items[0].quality).toEqual(0);
+  })
+
   it("Should not change any value for 'Sulfuras'", function() {
     const gildedRose = new Shop([ new Item("Sulfuras, Hand of Ragnaros", 0, 50) ]);
     const items = gildedRose.updateQuality();
