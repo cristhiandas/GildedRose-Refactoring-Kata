@@ -48,7 +48,7 @@ class Shop {
 
       let normalItem = () => {
           item.quality > 0 ? reduceQuality() : false
-          item.sellIn < 0 ? reduceQuality() : false
+          item.sellIn < 0 && item.quality > 0 ? reduceQuality() : false
       }
 
       let conjuredItem = () => {
