@@ -69,7 +69,7 @@ describe('Gilded Rose', function () {
     })
   })
 
-  describe('isNormal', function (){
+  describe('isNormal', function () {
     it('should return true if passed normal item', function () {
       const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ])
       name = gildedRose.items[0].name
