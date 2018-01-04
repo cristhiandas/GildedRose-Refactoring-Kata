@@ -4,17 +4,9 @@ class Shop {
   }
 
   updateQuality() {
+    let self = this;
+
     this.items.forEach(function(item){
-
-      const sulfaras = item.name.includes('Sulfuras')
-
-      const agedBrie = item.name.includes('Aged Brie')
-
-      const backstagePass = item.name.includes('Backstage passes')
-
-      const conjured = item.name.includes('Conjured')
-
-      const normalItems = !agedBrie && !backstagePass && !conjured
 
       let belowMaxQuality = () => item.quality < 50
 
@@ -49,16 +41,42 @@ class Shop {
       }
 
       let specialItem = () => {
-        agedBrie ? agedBries() : false
-        backstagePass ? backstagePasses() : false
-        conjured ? conjuredItem() : false
+        self.isAgedBrie(item.name) ? agedBries() : false
+        self.isBackstagePass(item.name) ? backstagePasses() : false
+        self.isConjured(item.name) ? conjuredItem() : false
       }
 
-      if (!sulfaras) {
+      if (!self.isSulfaras(item.name)) {
         item.sellIn -= 1;
-        normalItems ? normalItem() : specialItem()
+        self.isNormal(item.name) ? normalItem() : specialItem()
       }
     });
     return this.items;
   }
+
+  isSulfaras(name){
+    return name.includes('Sulfuras')
+  }
+
+  isAgedBrie(name){
+    return name.includes('Aged Brie')
+  }
+
+  isBackstagePass(name){
+    return name.includes('Backstage passes')
+  }
+
+  isConjured(name){
+    return name.includes('Conjured')
+  }
+
+  isNormal(name){
+    return (
+      !this.isAgedBrie(name) &&
+      !this.isBackstagePass(name) &&
+      !this.isConjured(name)
+    )
+  }
+
+  
 }

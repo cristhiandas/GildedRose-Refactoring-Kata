@@ -1,7 +1,91 @@
 describe("Gilded Rose", function() {
 
+  describe('isSulfaras', function(){
+    it('should return true if passed sulfuras', function(){
+      const gildedRose = new Shop([ {name: 'Sulfuras', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isSulfaras(name)).toEqual(true)
+    })
+
+    it('should return false if passed NOT sulfuras', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isSulfaras(name)).toEqual(false)
+    })
+  })
+
+  describe('isAgedBrie', function(){
+    it('should return true if passed Aged Brie', function(){
+      const gildedRose = new Shop([ {name: 'Aged Brie', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isAgedBrie(name)).toEqual(true)
+    })
+
+    it('should return false if passed NOT Aged Brie', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isAgedBrie(name)).toEqual(false)
+    })
+  })
+
+  describe('isBackstagePass', function(){
+    it('should return true if passed Backstage passes', function(){
+      const gildedRose = new Shop([ {name: 'Backstage passes', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isBackstagePass(name)).toEqual(true)
+    })
+
+    it('should return false if passed NOT Backstage passes', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isBackstagePass(name)).toEqual(false)
+    })
+  })
+
+  describe('isBackstagePass', function(){
+    it('should return true if passed Backstage passes', function(){
+      const gildedRose = new Shop([ {name: 'Backstage passes', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isBackstagePass(name)).toEqual(true)
+    })
+
+    it('should return false if passed NOT Backstage passes', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isBackstagePass(name)).toEqual(false)
+    })
+  })
+
+  describe('isConjured', function(){
+    it('should return true if passed Conjured', function(){
+      const gildedRose = new Shop([ {name: 'Conjured whatevs', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isConjured(name)).toEqual(true)
+    })
+
+    it('should return false if passed NOT Conjured', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isConjured(name)).toEqual(false)
+    })
+  })
+
+  describe('isNormal', function(){
+    it('should return true if passed normal item', function(){
+      const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isNormal(name)).toEqual(true)
+    })
+
+    it('should return false if passed special item', function(){
+      const gildedRose = new Shop([ {name: 'Conjured', sellIn: 0, quality: 80} ]);
+      name = gildedRose.items[0].name
+      expect(gildedRose.isNormal(name)).toEqual(false)
+    })
+  })
+
   it("should have the same name", function() {
-    const gildedRose = new Shop([ new Item("foo", 0, 0) ]);
+    const gildedRose = new Shop([ {name: 'foo', sellIn: 0, quality: 0} ]);
     const items = gildedRose.updateQuality();
     expect(items[0].name).toEqual("foo");
     expect(items[0].sellIn).toEqual(-1);
